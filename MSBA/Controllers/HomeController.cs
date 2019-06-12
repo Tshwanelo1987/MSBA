@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MSBA.Context;
 
 namespace MSBA.Controllers
@@ -17,19 +19,19 @@ namespace MSBA.Controllers
             ViewBag.Title = "Home Page";
 
             int count = Convert.ToInt32(Math.Ceiling((double)_dbContext.Projects.Count() / 10));
-            ViewBag.ProjectCount =  count;
+            ViewBag.ProjectCount = count;
             return View();
         }
         [HttpGet]
-        public ActionResult Paging(int id)
+        public async Task<JsonResult> Paging(int id)
         {
-            var pageSize = 10; 
+            var pageSize = 10;
 
 
             var skip = pageSize * id;
 
 
-            return Json(_dbContext.Projects.ToList().Skip(skip).Take(10));
+            return Json(await _dbContext.Projects.Skip(skip).Take(10).ToListAsync());
         }
     }
 }
