@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "dbContext":  "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=MBSATest;Data Source=TSHWANELO\\NTJPKCCU1"
+  }
+}
